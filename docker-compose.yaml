@@ -1,0 +1,41 @@
+services:
+  recipemanagement-db:
+    image: postgres:16
+    restart: always
+    ports:
+      - "51527:5432"
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: dev_recipemanagement
+    volumes:
+      - recipemanagement-data:/var/lib/postgresql/data
+
+  jaeger:
+    image: jaegertracing/all-in-one:latest
+    ports:
+      - "51529:5775/udp"
+      - "51528:6831/udp"
+      - "51530:6832/udp"
+      - "51531:5778"
+      - "51532:16686"
+      - "51533:14250"
+      - "51534:14268"
+      - "51535:14269"
+      - "51536:9411"
+
+  api:
+    build: .
+    restart: always
+    ports:
+      - "8080:8080"
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      RecipeManagement__ConnectionStrings__RecipeManagement: "Host=recipemanagement-db;Port=5432;Database=dev_recipemanagement;Username=postgres;Password=postgres"
+      RecipeManagement__JaegerHost: jaeger
+    depends_on:
+      - recipemanagement-db
+      - jaeger
+
+volumes:
+  recipemanagement-data:

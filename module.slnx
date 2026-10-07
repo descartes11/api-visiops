@@ -1,0 +1,13 @@
+<Solution>
+  <Folder Name="/RecipeManagement/" />
+  <Folder Name="/RecipeManagement/src/">
+    <Project Path="RecipeManagement/src/RecipeManagement/RecipeManagement.csproj" />
+  </Folder>
+  <Folder Name="/RecipeManagement/tests/">
+    <Project Path="RecipeManagement/tests/RecipeManagement.FunctionalTests/RecipeManagement.FunctionalTests.csproj" />
+    <Project Path="RecipeManagement/tests/RecipeManagement.IntegrationTests/RecipeManagement.IntegrationTests.csproj" />
+    <Project Path="RecipeManagement/tests/RecipeManagement.SharedTestHelpers/RecipeManagement.SharedTestHelpers.csproj" />
+    <Project Path="RecipeManagement/tests/RecipeManagement.UnitTests/RecipeManagement.UnitTests.csproj" />
+  </Folder>
+  <Project Path="SharedKernel/SharedKernel.csproj" />
+</Solution>
