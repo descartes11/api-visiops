@@ -4,21 +4,6 @@
         <name>RecipeManagement</name>
     </assembly>
     <members>
-        <member name="M:RecipeManagement.Controllers.v1.AuthController.Register(RecipeManagement.Domain.Users.Dtos.RegisterDto)">
-            <summary>
-            Creates a new user account.
-            </summary>
-        </member>
-        <member name="M:RecipeManagement.Controllers.v1.AuthController.Login(RecipeManagement.Domain.Users.Dtos.LoginDto)">
-            <summary>
-            Validates credentials and returns a JWT access token.
-            </summary>
-        </member>
-        <member name="M:RecipeManagement.Controllers.v1.AuthController.Me">
-            <summary>
-            Returns the identity of the authenticated user.
-            </summary>
-        </member>
         <member name="M:RecipeManagement.Controllers.v1.RecipesController.GetRecipes(RecipeManagement.Domain.Recipes.Dtos.RecipeParametersDto)">
             <summary>
             Gets a list of all Recipes.
@@ -59,18 +44,6 @@
             <inheritdoc />
         </member>
         <member name="M:RecipeManagement.Databases.Migrations.InitialMigration.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="T:RecipeManagement.Databases.Migrations.Auth.InitialAuth">
-            <inheritdoc />
-        </member>
-        <member name="M:RecipeManagement.Databases.Migrations.Auth.InitialAuth.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="M:RecipeManagement.Databases.Migrations.Auth.InitialAuth.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="M:RecipeManagement.Databases.Migrations.Auth.InitialAuth.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
             <inheritdoc />
         </member>
         <member name="P:RecipeManagement.Domain.Addresses.Address.Line1">

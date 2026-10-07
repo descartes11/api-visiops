@@ -32,7 +32,6 @@ public static class ServiceRegistration
         services.SetupHangfire(env);
 
         // Auth -- Do Not Delete
-        services.AddAuth(connectionString, configuration);
     }
 }
     

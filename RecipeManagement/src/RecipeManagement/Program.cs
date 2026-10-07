@@ -42,9 +42,6 @@ app.MapHealthChecks("api/health");
 app.UseSerilogRequestLogging();
 app.UseRouting();
 
-app.UseAuthentication();
-app.UseAuthorization();
-
 app.MapControllers();
 
 app.UseHangfireDashboard("/hangfire", new DashboardOptions

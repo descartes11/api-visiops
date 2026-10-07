@@ -7,7 +7,6 @@ public class RecipeManagementOptions
     public RabbitMqOptions RabbitMq { get; set; } = new RabbitMqOptions();
     public ConnectionStringOptions ConnectionStrings { get; set; } = new ConnectionStringOptions();
     public AuthOptions Auth { get; set; } = new AuthOptions();
-    public JwtOptions Jwt { get; set; } = new JwtOptions();
     public string JaegerHost { get; set; } = String.Empty;
     
     public class RabbitMqOptions
@@ -46,17 +45,6 @@ public class RecipeManagementOptions
         public string ClientId { get; set; } = String.Empty;
         public string ClientSecret { get; set; } = String.Empty;
     }
-
-    public class JwtOptions
-    {
-        public const string SectionName = $"{RecipeManagementOptions.SectionName}:Jwt";
-        public const int MinKeyLength = 32;
-
-        public string Key { get; set; } = String.Empty;
-        public string Issuer { get; set; } = String.Empty;
-        public string Audience { get; set; } = String.Empty;
-        public int ExpirationMinutes { get; set; } = 60;
-    }
 }
 
 public static class RecipeManagementOptionsExtensions
@@ -87,13 +75,6 @@ public static class RecipeManagementOptionsExtensions
         return configuration
             .GetSection(RecipeManagementOptions.AuthOptions.SectionName)
             .Get<RecipeManagementOptions.AuthOptions>();
-    }
-
-    public static RecipeManagementOptions.JwtOptions GetJwtOptions(this IConfiguration configuration)
-    {
-        return configuration
-            .GetSection(RecipeManagementOptions.JwtOptions.SectionName)
-            .Get<RecipeManagementOptions.JwtOptions>();
     }
 
     public static string GetJaegerHostValue(this IConfiguration configuration)
