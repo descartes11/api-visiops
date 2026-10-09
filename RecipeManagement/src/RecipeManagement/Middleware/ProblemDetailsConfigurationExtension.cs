@@ -3,6 +3,8 @@
 namespace RecipeManagement.Middleware;
 
 using Hellang.Middleware.ProblemDetails;
+using Microsoft.EntityFrameworkCore;
+using Npgsql;
 using Microsoft.Extensions.DependencyInjection;
 using System.Linq;
 using RecipeManagement.Exceptions;
@@ -17,6 +19,9 @@ public static class ProblemDetailsConfigurationExtension
         options.MapToStatusCode<ForbiddenAccessException>(StatusCodes.Status401Unauthorized);
         options.MapToStatusCode<NoRolesAssignedException>(StatusCodes.Status403Forbidden);
         options.MapToStatusCode<NotFoundException>(StatusCodes.Status404NotFound);
+        options.MapToStatusCode<ArgumentException>(StatusCodes.Status400BadRequest);
+        options.MapToStatusCode<InvalidOperationException>(StatusCodes.Status409Conflict);
+        options.MapUniqueViolationException();
 
         // You can configure the middleware to re-throw certain types of exceptions, all exceptions or based on a predicate.
         // This is useful if you have upstream middleware that needs to do additional handling of exceptions.
@@ -39,6 +44,18 @@ public static class ProblemDetailsConfigurationExtension
         options.MapToStatusCode<Exception>(StatusCodes.Status500InternalServerError);
     }
     
+    // Violation d'un index unique PostgreSQL (SqlState 23505) -> 409 au lieu de 500.
+    // Les autres DbUpdateException restent traitées par le mappage 500 par défaut.
+    private static void MapUniqueViolationException(this ProblemDetailsOptions options) =>
+        options.Map<DbUpdateException>(
+            (ctx, ex) => ex.InnerException is PostgresException { SqlState: PostgresErrorCodes.UniqueViolation },
+            (ctx, ex) => new Microsoft.AspNetCore.Mvc.ProblemDetails
+            {
+                Status = StatusCodes.Status409Conflict,
+                Title = "Conflict",
+                Detail = "Une valeur unique existe déjà (par exemple, un rôle portant ce nom)."
+            });
+
     private static void MapFluentValidationException(this ProblemDetailsOptions options) =>
         options.Map<FluentValidation.ValidationException>((ctx, ex) =>
         {

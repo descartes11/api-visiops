@@ -7,12 +7,14 @@ using RecipeManagement.Exceptions;
 using Resources;
 using MediatR;
 using RecipeManagement.Domain.Recipes;
+using RecipeManagement.Domain.Kcrs;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using System.Linq.Expressions;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore.Query;
+using RecipeManagement.Domain.Qualifications;
 
 public sealed class RecipesDbContext(DbContextOptions<RecipesDbContext> options, 
     ICurrentUserService currentUserService, 
@@ -23,7 +25,8 @@ public sealed class RecipesDbContext(DbContextOptions<RecipesDbContext> options,
     #region DbSet Region - Do Not Delete
     public DbSet<Recipe> Recipes { get; set; }
     #endregion DbSet Region - Do Not Delete
-
+    public DbSet<Kcr> Kcrs { get; set; }
+    public DbSet<Qualification> Qualifications { get; set; }
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);
@@ -32,7 +35,8 @@ public sealed class RecipesDbContext(DbContextOptions<RecipesDbContext> options,
                 https://docs.microsoft.com/en-us/ef/core/querying/filters
                 https://github.com/dotnet/efcore/issues/10275
         */
-
+        modelBuilder.ApplyConfiguration(new KcrConfiguration());
+        modelBuilder.ApplyConfiguration(new QualificationConfiguration());
         #region Entity Database Config Region - Only delete if you don't want to automatically add configurations
         modelBuilder.ApplyConfiguration(new RecipeConfiguration());
         #endregion Entity Database Config Region - Only delete if you don't want to automatically add configurations

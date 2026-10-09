@@ -4,6 +4,57 @@
         <name>RecipeManagement</name>
     </assembly>
     <members>
+        <member name="T:RecipeManagement.Controllers.v1.KcrQualificationController">
+            <summary>
+            La fiche de qualification est une sous-ressource du rôle :
+            /api/v1/kcrs/{kcrId}/qualification (au singulier : une seule fiche par rôle).
+            </summary>
+        </member>
+        <member name="M:RecipeManagement.Controllers.v1.KcrQualificationController.#ctor(MediatR.IMediator)">
+            <summary>
+            La fiche de qualification est une sous-ressource du rôle :
+            /api/v1/kcrs/{kcrId}/qualification (au singulier : une seule fiche par rôle).
+            </summary>
+        </member>
+        <member name="M:RecipeManagement.Controllers.v1.KcrQualificationController.Get(System.Guid)">
+            <summary>GET — lit la fiche du rôle. 404 si le rôle n'en a pas.</summary>
+        </member>
+        <member name="M:RecipeManagement.Controllers.v1.KcrQualificationController.Add(System.Guid,RecipeManagement.Domain.Qualifications.Dtos.QualificationForCreationDto)">
+            <summary>POST — crée la fiche du rôle. 201 + Location.</summary>
+        </member>
+        <member name="M:RecipeManagement.Controllers.v1.KcrQualificationController.Update(System.Guid,RecipeManagement.Domain.Qualifications.Dtos.QualificationForUpdateDto)">
+            <summary>PUT — remplace toute la fiche. 204.</summary>
+        </member>
+        <member name="M:RecipeManagement.Controllers.v1.KcrQualificationController.Delete(System.Guid)">
+            <summary>DELETE — supprime (logiquement) la fiche. 204.</summary>
+        </member>
+        <member name="T:RecipeManagement.Controllers.v1.KcrsController">
+            <summary>
+            Endpoints REST des rôles. Le contrôleur ne contient aucune logique :
+            il transforme la requête HTTP en commande / requête MediatR.
+            </summary>
+        </member>
+        <member name="M:RecipeManagement.Controllers.v1.KcrsController.#ctor(MediatR.IMediator)">
+            <summary>
+            Endpoints REST des rôles. Le contrôleur ne contient aucune logique :
+            il transforme la requête HTTP en commande / requête MediatR.
+            </summary>
+        </member>
+        <member name="M:RecipeManagement.Controllers.v1.KcrsController.GetKcrs(RecipeManagement.Domain.Kcrs.Dtos.KcrParametersDto)">
+            <summary>GET /api/v1/kcrs — liste paginée, filtrable, triable.</summary>
+        </member>
+        <member name="M:RecipeManagement.Controllers.v1.KcrsController.GetKcr(System.Guid)">
+            <summary>GET /api/v1/kcrs/{id} — un rôle. 404 s'il n'existe pas.</summary>
+        </member>
+        <member name="M:RecipeManagement.Controllers.v1.KcrsController.AddKcr(RecipeManagement.Domain.Kcrs.Dtos.KcrForCreationDto)">
+            <summary>POST /api/v1/kcrs — crée un rôle. Renvoie 201 + en-tête Location.</summary>
+        </member>
+        <member name="M:RecipeManagement.Controllers.v1.KcrsController.UpdateKcr(System.Guid,RecipeManagement.Domain.Kcrs.Dtos.KcrForUpdateDto)">
+            <summary>PUT /api/v1/kcrs/{id} — modifie un rôle. Renvoie 204.</summary>
+        </member>
+        <member name="M:RecipeManagement.Controllers.v1.KcrsController.DeleteKcr(System.Guid)">
+            <summary>DELETE /api/v1/kcrs/{id} — suppression logique. Renvoie 204.</summary>
+        </member>
         <member name="M:RecipeManagement.Controllers.v1.RecipesController.GetRecipes(RecipeManagement.Domain.Recipes.Dtos.RecipeParametersDto)">
             <summary>
             Gets a list of all Recipes.
@@ -29,6 +80,16 @@
             Deletes an existing Recipe record.
             </summary>
         </member>
+        <member name="M:RecipeManagement.Databases.EntityConfigurations.KcrConfiguration.Configure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder{RecipeManagement.Domain.Kcrs.Kcr})">
+            <summary>
+            La configuration de la table kcr_role.
+            </summary>
+        </member>
+        <member name="M:RecipeManagement.Databases.EntityConfigurations.QualificationConfiguration.Configure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder{RecipeManagement.Domain.Qualifications.Qualification})">
+            <summary>
+            La configuration de la table kcr_qualification.
+            </summary>
+        </member>
         <member name="M:RecipeManagement.Databases.EntityConfigurations.RecipeConfiguration.Configure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder{RecipeManagement.Domain.Recipes.Recipe})">
             <summary>
             The database configuration for Recipes. 
@@ -44,6 +105,42 @@
             <inheritdoc />
         </member>
         <member name="M:RecipeManagement.Databases.Migrations.InitialMigration.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:RecipeManagement.Databases.Migrations.AddRole">
+            <inheritdoc />
+        </member>
+        <member name="M:RecipeManagement.Databases.Migrations.AddRole.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:RecipeManagement.Databases.Migrations.AddRole.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:RecipeManagement.Databases.Migrations.AddRole.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:RecipeManagement.Databases.Migrations.AddQualification">
+            <inheritdoc />
+        </member>
+        <member name="M:RecipeManagement.Databases.Migrations.AddQualification.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:RecipeManagement.Databases.Migrations.AddQualification.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:RecipeManagement.Databases.Migrations.AddQualification.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:RecipeManagement.Databases.Migrations.FixQualificationRelation">
+            <inheritdoc />
+        </member>
+        <member name="M:RecipeManagement.Databases.Migrations.FixQualificationRelation.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:RecipeManagement.Databases.Migrations.FixQualificationRelation.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:RecipeManagement.Databases.Migrations.FixQualificationRelation.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
             <inheritdoc />
         </member>
         <member name="P:RecipeManagement.Domain.Addresses.Address.Line1">
@@ -75,6 +172,567 @@
             <summary>
             Two-letter country code <a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">(ISO 3166-1 alpha-2)</a>.
             </summary>
+        </member>
+        <member name="T:RecipeManagement.Domain.Kcrs.DomainEvents.KcrCreated">
+             <summary>
+             Événement de domaine levé lorsqu'un nouveau rôle est créé.
+            
+             Il est ajouté à la liste DomainEvents de l'entité par
+             <c>QueueDomainEvent(...)</c> dans <see cref="M:RecipeManagement.Domain.Kcrs.Kcr.Create(RecipeManagement.Domain.Kcrs.Models.KcrForCreation)"/>.
+             Le DbContext publie ensuite ces événements (via MediatR) après
+             la sauvegarde, ce qui permet de réagir à la création
+             (envoyer une notification, écrire un journal, etc.) sans
+             surcharger l'entité elle-même.
+             </summary>
+        </member>
+        <member name="P:RecipeManagement.Domain.Kcrs.DomainEvents.KcrCreated.Kcr">
+            <summary>
+            Le rôle qui vient d'être créé.
+            On transmet l'entité complète car l'Id seul ne suffit pas
+            toujours aux gestionnaires (handlers) de l'événement.
+            </summary>
+        </member>
+        <member name="T:RecipeManagement.Domain.Kcrs.DomainEvents.KcrUpdated">
+             <summary>
+             Événement de domaine levé lorsqu'un rôle existant est modifié.
+            
+             Il est ajouté par <c>QueueDomainEvent(...)</c> dans <see cref="M:RecipeManagement.Domain.Kcrs.Kcr.Update(RecipeManagement.Domain.Kcrs.Models.KcrForUpdate)"/>
+             et publié par le DbContext après la sauvegarde.
+             </summary>
+        </member>
+        <member name="P:RecipeManagement.Domain.Kcrs.DomainEvents.KcrUpdated.Id">
+            <summary>
+            Identifiant du rôle modifié.
+            Un handler qui a besoin des données à jour peut relire
+            le rôle depuis le repository avec cet Id.
+            </summary>
+        </member>
+        <member name="T:RecipeManagement.Domain.Kcrs.Dtos.KcrDto">
+            <summary>
+            Ce que l'API renvoie au client pour un rôle (lecture).
+            L'entité Kcr ne sort jamais du domaine : on renvoie toujours ce DTO.
+            </summary>
+        </member>
+        <member name="P:RecipeManagement.Domain.Kcrs.Dtos.KcrDto.Id">
+            <summary>Identifiant du rôle (kcr_role_id).</summary>
+        </member>
+        <member name="P:RecipeManagement.Domain.Kcrs.Dtos.KcrDto.KcrName">
+            <summary>Nom du rôle (role_name).</summary>
+        </member>
+        <member name="P:RecipeManagement.Domain.Kcrs.Dtos.KcrDto.Description">
+            <summary>Description du rôle (description).</summary>
+        </member>
+        <member name="P:RecipeManagement.Domain.Kcrs.Dtos.KcrDto.IsActive">
+            <summary>Rôle actif ou non (is_active).</summary>
+        </member>
+        <member name="P:RecipeManagement.Domain.Kcrs.Dtos.KcrDto.CreatedOn">
+            <summary>Date de création (created_at), remplie par l'audit de BaseEntity.</summary>
+        </member>
+        <member name="P:RecipeManagement.Domain.Kcrs.Dtos.KcrDto.Qualification">
+            <summary>Fiche de qualification du rôle, ou null s'il n'en a pas.</summary>
+        </member>
+        <member name="T:RecipeManagement.Domain.Kcrs.Dtos.KcrForCreationDto">
+            <summary>
+            Corps de la requête POST /api/v1/kcrs.
+            Pas d'Id ni de date : ils sont générés côté serveur.
+            </summary>
+        </member>
+        <member name="P:RecipeManagement.Domain.Kcrs.Dtos.KcrForCreationDto.KcrName">
+            <summary>Nom du rôle. Obligatoire et unique.</summary>
+        </member>
+        <member name="P:RecipeManagement.Domain.Kcrs.Dtos.KcrForCreationDto.Description">
+            <summary>Description du rôle. Optionnelle.</summary>
+        </member>
+        <member name="P:RecipeManagement.Domain.Kcrs.Dtos.KcrForCreationDto.IsActive">
+            <summary>Actif à la création. Vrai par défaut si absent du JSON.</summary>
+        </member>
+        <member name="T:RecipeManagement.Domain.Kcrs.Dtos.KcrForUpdateDto">
+            <summary>
+            Corps de la requête PUT /api/v1/kcrs/{id}.
+            L'Id vient de l'URL, pas du corps. Toutes les valeurs sont remplacées (PUT).
+            </summary>
+        </member>
+        <member name="P:RecipeManagement.Domain.Kcrs.Dtos.KcrForUpdateDto.KcrName">
+            <summary>Nouveau nom du rôle. Obligatoire et unique.</summary>
+        </member>
+        <member name="P:RecipeManagement.Domain.Kcrs.Dtos.KcrForUpdateDto.Description">
+            <summary>Nouvelle description. Optionnelle.</summary>
+        </member>
+        <member name="P:RecipeManagement.Domain.Kcrs.Dtos.KcrForUpdateDto.IsActive">
+            <summary>Nouvel état actif / inactif.</summary>
+        </member>
+        <member name="T:RecipeManagement.Domain.Kcrs.Dtos.KcrParametersDto">
+             <summary>
+             Paramètres de la requête GET /api/v1/kcrs (query string).
+            
+             - PageNumber / PageSize : hérités de BasePaginationParameters (pagination).
+             - Filters   : filtre QueryKit, ex. ?Filters=IsActive == true &amp;&amp; KcrName @=* "chef"
+             - SortOrder : tri QueryKit,   ex. ?SortOrder=KcrName  ou  ?SortOrder=-CreatedOn (décroissant)
+             </summary>
+        </member>
+        <member name="P:RecipeManagement.Domain.Kcrs.Dtos.KcrParametersDto.Filters">
+            <summary>Expression de filtre QueryKit (optionnelle).</summary>
+        </member>
+        <member name="P:RecipeManagement.Domain.Kcrs.Dtos.KcrParametersDto.SortOrder">
+            <summary>Expression de tri QueryKit (optionnelle).</summary>
+        </member>
+        <member name="T:RecipeManagement.Domain.Kcrs.Features.AddKcr">
+            <summary>
+            Feature : créer un rôle (POST /api/v1/kcrs).
+            Chemin : Controller -> MediatR -> Handler -> DbContext.
+            </summary>
+        </member>
+        <member name="T:RecipeManagement.Domain.Kcrs.Features.AddKcr.Command">
+            <summary>La commande envoyée par le contrôleur via mediator.Send(...).</summary>
+        </member>
+        <member name="M:RecipeManagement.Domain.Kcrs.Features.AddKcr.Command.#ctor(RecipeManagement.Domain.Kcrs.Dtos.KcrForCreationDto)">
+            <summary>La commande envoyée par le contrôleur via mediator.Send(...).</summary>
+        </member>
+        <member name="T:RecipeManagement.Domain.Kcrs.Features.DeleteKcr">
+             <summary>
+             Feature : supprimer un rôle (DELETE /api/v1/kcrs/{id}).
+            
+             Suppression LOGIQUE : comme pour Recipe, le DbContext intercepte le Remove()
+             et passe IsDeleted à true au lieu d'effacer la ligne (voir BaseEntity.UpdateIsDeleted).
+             Le rôle disparaît des lectures mais reste en base.
+            
+             Variante : pour seulement le rendre inactif (is_active = false), remplacer
+             dbContext.Kcrs.Remove(kcr) par kcr.Deactivate().
+             </summary>
+        </member>
+        <member name="T:RecipeManagement.Domain.Kcrs.Features.GetKcr">
+            <summary>
+            Feature : lire un rôle par son Id (GET /api/v1/kcrs/{id}).
+            </summary>
+        </member>
+        <member name="T:RecipeManagement.Domain.Kcrs.Features.GetKcrList">
+            <summary>
+            Feature : liste paginée, filtrable et triable (GET /api/v1/kcrs).
+            Même mécanique que GetRecipeList (QueryKit + PagedList).
+            </summary>
+        </member>
+        <member name="T:RecipeManagement.Domain.Kcrs.Features.UpdateKcr">
+            <summary>
+            Feature : modifier un rôle (PUT /api/v1/kcrs/{id}).
+            </summary>
+        </member>
+        <member name="T:RecipeManagement.Domain.Kcrs.Kcr">
+             <summary>
+             Entité correspondant à la table KCR_ROLE du modèle conceptuel.
+            
+             Elle hérite de BaseEntity, qui fournit déjà :
+             - Id (kcr_role_id)            -> clé primaire Guid
+             - CreatedOn / CreatedBy       -> created_at (rempli par l'audit)
+             - LastModifiedOn / By         -> suivi des modifications
+             - IsDeleted                   -> suppression logique (soft delete)
+             - DomainEvents                -> événements à publier
+             </summary>
+        </member>
+        <member name="P:RecipeManagement.Domain.Kcrs.Kcr.KcrName">
+            <summary>Nom du rôle (role_name). Obligatoire.</summary>
+        </member>
+        <member name="P:RecipeManagement.Domain.Kcrs.Kcr.Description">
+            <summary>Description du rôle (description). Optionnelle.</summary>
+        </member>
+        <member name="P:RecipeManagement.Domain.Kcrs.Kcr.IsActive">
+            <summary>Rôle actif ou non (is_active). Vrai par défaut.</summary>
+        </member>
+        <member name="M:RecipeManagement.Domain.Kcrs.Kcr.Create(RecipeManagement.Domain.Kcrs.Models.KcrForCreation)">
+            <summary>
+            Fabrique : crée un nouveau rôle valide à partir des données de création.
+            </summary>
+        </member>
+        <member name="M:RecipeManagement.Domain.Kcrs.Kcr.Update(RecipeManagement.Domain.Kcrs.Models.KcrForUpdate)">
+            <summary>
+            Met à jour toutes les propriétés modifiables du rôle.
+            </summary>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:RecipeManagement.Domain.Kcrs.Kcr.Deactivate" -->
+        <member name="M:RecipeManagement.Domain.Kcrs.Kcr.SetKcrName(System.String)">
+            <summary>
+            Règle métier : le nom est obligatoire. On supprime aussi les espaces superflus.
+            </summary>
+        </member>
+        <member name="M:RecipeManagement.Domain.Kcrs.Kcr.#ctor">
+            <summary>
+            Constructeur protégé requis par EF Core pour matérialiser l'entité.
+            Utilisez Kcr.Create(...) dans le code applicatif.
+            </summary>
+        </member>
+        <member name="T:RecipeManagement.Domain.Kcrs.Mappings.KcrMapper">
+            <summary>
+            Conversions entre DTOs (couche API) et modèles / entité (couche domaine).
+            Mapperly génère le code de ces méthodes à la compilation :
+            on écrit seulement les signatures "partial".
+            </summary>
+        </member>
+        <member name="M:RecipeManagement.Domain.Kcrs.Mappings.KcrMapper.ToKcrForCreation(RecipeManagement.Domain.Kcrs.Dtos.KcrForCreationDto)">
+            <summary>DTO reçu en POST -> modèle accepté par Kcr.Create().</summary>
+        </member>
+        <member name="M:RecipeManagement.Domain.Kcrs.Mappings.KcrMapper.ToKcrForUpdate(RecipeManagement.Domain.Kcrs.Dtos.KcrForUpdateDto)">
+            <summary>DTO reçu en PUT -> modèle accepté par kcr.Update().</summary>
+        </member>
+        <member name="M:RecipeManagement.Domain.Kcrs.Mappings.KcrMapper.ToKcrDto(RecipeManagement.Domain.Kcrs.Kcr)">
+            <summary>Entité -> DTO renvoyé au client.</summary>
+        </member>
+        <member name="M:RecipeManagement.Domain.Kcrs.Mappings.KcrMapper.ToKcrDtoQueryable(System.Linq.IQueryable{RecipeManagement.Domain.Kcrs.Kcr})">
+            <summary>
+            Projection IQueryable : EF Core traduit le mapping en SQL
+            (SELECT uniquement des colonnes utiles) pour la liste paginée.
+            </summary>
+        </member>
+        <member name="T:RecipeManagement.Domain.Kcrs.Models.KcrForCreation">
+            <summary>
+            Modèle interne au domaine contenant les données nécessaires pour créer un rôle.
+            Il est passé à <see cref="M:RecipeManagement.Domain.Kcrs.Kcr.Create(RecipeManagement.Domain.Kcrs.Models.KcrForCreation)"/>.
+            
+            Différence avec KcrForCreationDto :
+            - le DTO est ce que l'API reçoit (couche présentation) ;
+            - ce modèle est ce que l'entité accepte (couche domaine).
+            Le mapper (KcrMapper) convertit l'un vers l'autre.
+            </summary>
+        </member>
+        <member name="P:RecipeManagement.Domain.Kcrs.Models.KcrForCreation.KcrName">
+            <summary>
+            Nom du rôle (colonne role_name). Obligatoire et unique.
+            La validation (non vide) est faite dans l'entité Kcr.
+            </summary>
+        </member>
+        <member name="P:RecipeManagement.Domain.Kcrs.Models.KcrForCreation.Description">
+            <summary>
+            Description libre du rôle (colonne description). Optionnelle.
+            </summary>
+        </member>
+        <member name="P:RecipeManagement.Domain.Kcrs.Models.KcrForCreation.IsActive">
+            <summary>
+            Indique si le rôle est actif à sa création (colonne is_active).
+            Par défaut : true.
+            </summary>
+        </member>
+        <member name="T:RecipeManagement.Domain.Kcrs.Models.KcrForUpdate">
+             <summary>
+             Modèle interne au domaine contenant les données nécessaires pour modifier un rôle.
+             Il est passé à <see cref="M:RecipeManagement.Domain.Kcrs.Kcr.Update(RecipeManagement.Domain.Kcrs.Models.KcrForUpdate)"/>.
+            
+             Toutes les propriétés modifiables sont présentes : la mise à jour
+             remplace l'état complet du rôle (comportement d'un PUT).
+             </summary>
+        </member>
+        <member name="P:RecipeManagement.Domain.Kcrs.Models.KcrForUpdate.KcrName">
+            <summary>
+            Nouveau nom du rôle (colonne role_name). Obligatoire et unique.
+            </summary>
+        </member>
+        <member name="P:RecipeManagement.Domain.Kcrs.Models.KcrForUpdate.Description">
+            <summary>
+            Nouvelle description (colonne description). Optionnelle.
+            </summary>
+        </member>
+        <member name="P:RecipeManagement.Domain.Kcrs.Models.KcrForUpdate.IsActive">
+            <summary>
+            Nouvel état actif/inactif (colonne is_active).
+            </summary>
+        </member>
+        <member name="T:RecipeManagement.Domain.Qualifications.DomainEvents.QualificationCreated">
+            <summary>Levé quand la fiche de qualification d'un rôle est créée.</summary>
+        </member>
+        <member name="T:RecipeManagement.Domain.Qualifications.DomainEvents.QualificationUpdated">
+            <summary>Levé quand la fiche de qualification d'un rôle est modifiée.</summary>
+        </member>
+        <member name="T:RecipeManagement.Domain.Qualifications.Dtos.QualificationDto">
+            <summary>Fiche de qualification renvoyée par l'API.</summary>
+        </member>
+        <member name="P:RecipeManagement.Domain.Qualifications.Dtos.QualificationDto.Id">
+            <summary>Identifiant de la fiche.</summary>
+        </member>
+        <member name="P:RecipeManagement.Domain.Qualifications.Dtos.QualificationDto.KcrId">
+            <summary>Rôle auquel la fiche appartient.</summary>
+        </member>
+        <member name="P:RecipeManagement.Domain.Qualifications.Dtos.QualificationDto.MinimumRecruitmentRequirements">
+            <summary>Exigences de recrutement minimales (minimum_recruitment_requirements).</summary>
+        </member>
+        <member name="P:RecipeManagement.Domain.Qualifications.Dtos.QualificationDto.RecruitmentRequirementsVerification">
+            <summary>Vérification des exigences de recrutement (recruitment_requirements_verification).</summary>
+        </member>
+        <member name="P:RecipeManagement.Domain.Qualifications.Dtos.QualificationDto.RequiredPerformanceThresholds">
+            <summary>Seuils de performance requis (required_performance_thresholds).</summary>
+        </member>
+        <member name="P:RecipeManagement.Domain.Qualifications.Dtos.QualificationDto.Comments">
+            <summary>Commentaires (comments).</summary>
+        </member>
+        <member name="P:RecipeManagement.Domain.Qualifications.Dtos.QualificationDto.SpecificSkillsAndKnowledge">
+            <summary>Compétences et connaissances spécifiques (specific_skills_and_knowledge).</summary>
+        </member>
+        <member name="P:RecipeManagement.Domain.Qualifications.Dtos.QualificationDto.TrainingModules">
+            <summary>Modules de formation (training_modules).</summary>
+        </member>
+        <member name="P:RecipeManagement.Domain.Qualifications.Dtos.QualificationDto.TrainingMode">
+            <summary>Mode de formation (présentiel, e-learning, mixte, sur poste…) (training_mode).</summary>
+        </member>
+        <member name="P:RecipeManagement.Domain.Qualifications.Dtos.QualificationDto.AuthorizedTrainingPersonnel">
+            <summary>Personnel autorisé à délivrer la formation (authorized_training_personnel).</summary>
+        </member>
+        <member name="P:RecipeManagement.Domain.Qualifications.Dtos.QualificationDto.MinimumCompetencyVerification">
+            <summary>Vérification des compétences minimales (minimum_competency_verification).</summary>
+        </member>
+        <member name="P:RecipeManagement.Domain.Qualifications.Dtos.QualificationDto.InitialTrainingPerformanceThreshold">
+            <summary>Seuil de performances pour la formation initiale (initial_training_performance_threshold).</summary>
+        </member>
+        <member name="P:RecipeManagement.Domain.Qualifications.Dtos.QualificationDto.RecurrentCheckPerformanceThreshold">
+            <summary>Seuil de performances pour la revérification annuelle ou suite à un changement (recurrent_check_performance_threshold).</summary>
+        </member>
+        <member name="P:RecipeManagement.Domain.Qualifications.Dtos.QualificationDto.TrainingFramework">
+            <summary>Cadre ou méthodologie de formation (training_framework).</summary>
+        </member>
+        <member name="P:RecipeManagement.Domain.Qualifications.Dtos.QualificationDto.CreatedOn">
+            <summary>Date de création (audit).</summary>
+        </member>
+        <member name="P:RecipeManagement.Domain.Qualifications.Dtos.QualificationDto.LastModifiedOn">
+            <summary>Date de dernière modification (audit).</summary>
+        </member>
+        <member name="T:RecipeManagement.Domain.Qualifications.Dtos.QualificationForCreationDto">
+            <summary>Corps JSON de POST /api/v1/kcrs/{kcrId}/qualification. Le kcrId vient de l'URL.</summary>
+        </member>
+        <member name="P:RecipeManagement.Domain.Qualifications.Dtos.QualificationForCreationDto.MinimumRecruitmentRequirements">
+            <summary>Exigences de recrutement minimales (minimum_recruitment_requirements).</summary>
+        </member>
+        <member name="P:RecipeManagement.Domain.Qualifications.Dtos.QualificationForCreationDto.RecruitmentRequirementsVerification">
+            <summary>Vérification des exigences de recrutement (recruitment_requirements_verification).</summary>
+        </member>
+        <member name="P:RecipeManagement.Domain.Qualifications.Dtos.QualificationForCreationDto.RequiredPerformanceThresholds">
+            <summary>Seuils de performance requis (required_performance_thresholds).</summary>
+        </member>
+        <member name="P:RecipeManagement.Domain.Qualifications.Dtos.QualificationForCreationDto.Comments">
+            <summary>Commentaires (comments).</summary>
+        </member>
+        <member name="P:RecipeManagement.Domain.Qualifications.Dtos.QualificationForCreationDto.SpecificSkillsAndKnowledge">
+            <summary>Compétences et connaissances spécifiques (specific_skills_and_knowledge).</summary>
+        </member>
+        <member name="P:RecipeManagement.Domain.Qualifications.Dtos.QualificationForCreationDto.TrainingModules">
+            <summary>Modules de formation (training_modules).</summary>
+        </member>
+        <member name="P:RecipeManagement.Domain.Qualifications.Dtos.QualificationForCreationDto.TrainingMode">
+            <summary>Mode de formation (présentiel, e-learning, mixte, sur poste…) (training_mode).</summary>
+        </member>
+        <member name="P:RecipeManagement.Domain.Qualifications.Dtos.QualificationForCreationDto.AuthorizedTrainingPersonnel">
+            <summary>Personnel autorisé à délivrer la formation (authorized_training_personnel).</summary>
+        </member>
+        <member name="P:RecipeManagement.Domain.Qualifications.Dtos.QualificationForCreationDto.MinimumCompetencyVerification">
+            <summary>Vérification des compétences minimales (minimum_competency_verification).</summary>
+        </member>
+        <member name="P:RecipeManagement.Domain.Qualifications.Dtos.QualificationForCreationDto.InitialTrainingPerformanceThreshold">
+            <summary>Seuil de performances pour la formation initiale (initial_training_performance_threshold).</summary>
+        </member>
+        <member name="P:RecipeManagement.Domain.Qualifications.Dtos.QualificationForCreationDto.RecurrentCheckPerformanceThreshold">
+            <summary>Seuil de performances pour la revérification annuelle ou suite à un changement (recurrent_check_performance_threshold).</summary>
+        </member>
+        <member name="P:RecipeManagement.Domain.Qualifications.Dtos.QualificationForCreationDto.TrainingFramework">
+            <summary>Cadre ou méthodologie de formation (training_framework).</summary>
+        </member>
+        <member name="T:RecipeManagement.Domain.Qualifications.Dtos.QualificationForUpdateDto">
+            <summary>Corps JSON de PUT /api/v1/kcrs/{kcrId}/qualification (objet complet). Le kcrId vient de l'URL.</summary>
+        </member>
+        <member name="P:RecipeManagement.Domain.Qualifications.Dtos.QualificationForUpdateDto.MinimumRecruitmentRequirements">
+            <summary>Exigences de recrutement minimales (minimum_recruitment_requirements).</summary>
+        </member>
+        <member name="P:RecipeManagement.Domain.Qualifications.Dtos.QualificationForUpdateDto.RecruitmentRequirementsVerification">
+            <summary>Vérification des exigences de recrutement (recruitment_requirements_verification).</summary>
+        </member>
+        <member name="P:RecipeManagement.Domain.Qualifications.Dtos.QualificationForUpdateDto.RequiredPerformanceThresholds">
+            <summary>Seuils de performance requis (required_performance_thresholds).</summary>
+        </member>
+        <member name="P:RecipeManagement.Domain.Qualifications.Dtos.QualificationForUpdateDto.Comments">
+            <summary>Commentaires (comments).</summary>
+        </member>
+        <member name="P:RecipeManagement.Domain.Qualifications.Dtos.QualificationForUpdateDto.SpecificSkillsAndKnowledge">
+            <summary>Compétences et connaissances spécifiques (specific_skills_and_knowledge).</summary>
+        </member>
+        <member name="P:RecipeManagement.Domain.Qualifications.Dtos.QualificationForUpdateDto.TrainingModules">
+            <summary>Modules de formation (training_modules).</summary>
+        </member>
+        <member name="P:RecipeManagement.Domain.Qualifications.Dtos.QualificationForUpdateDto.TrainingMode">
+            <summary>Mode de formation (présentiel, e-learning, mixte, sur poste…) (training_mode).</summary>
+        </member>
+        <member name="P:RecipeManagement.Domain.Qualifications.Dtos.QualificationForUpdateDto.AuthorizedTrainingPersonnel">
+            <summary>Personnel autorisé à délivrer la formation (authorized_training_personnel).</summary>
+        </member>
+        <member name="P:RecipeManagement.Domain.Qualifications.Dtos.QualificationForUpdateDto.MinimumCompetencyVerification">
+            <summary>Vérification des compétences minimales (minimum_competency_verification).</summary>
+        </member>
+        <member name="P:RecipeManagement.Domain.Qualifications.Dtos.QualificationForUpdateDto.InitialTrainingPerformanceThreshold">
+            <summary>Seuil de performances pour la formation initiale (initial_training_performance_threshold).</summary>
+        </member>
+        <member name="P:RecipeManagement.Domain.Qualifications.Dtos.QualificationForUpdateDto.RecurrentCheckPerformanceThreshold">
+            <summary>Seuil de performances pour la revérification annuelle ou suite à un changement (recurrent_check_performance_threshold).</summary>
+        </member>
+        <member name="P:RecipeManagement.Domain.Qualifications.Dtos.QualificationForUpdateDto.TrainingFramework">
+            <summary>Cadre ou méthodologie de formation (training_framework).</summary>
+        </member>
+        <member name="T:RecipeManagement.Domain.Qualifications.Features.AddQualification">
+            <summary>
+            Crée la fiche de qualification d'un rôle (POST /api/v1/kcrs/{kcrId}/qualification).
+            Refuse si le rôle n'existe pas (404) ou s'il a déjà une fiche (409 / ValidationException).
+            </summary>
+        </member>
+        <member name="T:RecipeManagement.Domain.Qualifications.Features.DeleteQualification">
+            <summary>
+            Supprime la fiche de qualification d'un rôle (DELETE /api/v1/kcrs/{kcrId}/qualification).
+            Suppression logique (IsDeleted = true), comme pour Recipe et Kcr.
+            </summary>
+        </member>
+        <member name="T:RecipeManagement.Domain.Qualifications.Features.GetQualification">
+            <summary>Lit la fiche de qualification d'un rôle (GET /api/v1/kcrs/{kcrId}/qualification).</summary>
+        </member>
+        <member name="T:RecipeManagement.Domain.Qualifications.Features.UpdateQualification">
+            <summary>Modifie la fiche de qualification d'un rôle (PUT /api/v1/kcrs/{kcrId}/qualification).</summary>
+        </member>
+        <member name="T:RecipeManagement.Domain.Qualifications.Mappings.QualificationMapper">
+            <summary>Conversions DTO &lt;-&gt; domaine, générées par Mapperly à la compilation.</summary>
+        </member>
+        <member name="M:RecipeManagement.Domain.Qualifications.Mappings.QualificationMapper.ToQualificationDto(RecipeManagement.Domain.Qualifications.Qualification)">
+            <summary>La navigation Kcr n'est pas copiée dans le DTO (seul KcrId l'est).</summary>
+        </member>
+        <member name="T:RecipeManagement.Domain.Qualifications.Models.QualificationForCreation">
+            <summary>Modèle de domaine pour créer la fiche (passé à Qualification.Create). Le KcrId vient de l'URL.</summary>
+        </member>
+        <member name="P:RecipeManagement.Domain.Qualifications.Models.QualificationForCreation.MinimumRecruitmentRequirements">
+            <summary>Exigences de recrutement minimales (minimum_recruitment_requirements).</summary>
+        </member>
+        <member name="P:RecipeManagement.Domain.Qualifications.Models.QualificationForCreation.RecruitmentRequirementsVerification">
+            <summary>Vérification des exigences de recrutement (recruitment_requirements_verification).</summary>
+        </member>
+        <member name="P:RecipeManagement.Domain.Qualifications.Models.QualificationForCreation.RequiredPerformanceThresholds">
+            <summary>Seuils de performance requis (required_performance_thresholds).</summary>
+        </member>
+        <member name="P:RecipeManagement.Domain.Qualifications.Models.QualificationForCreation.Comments">
+            <summary>Commentaires (comments).</summary>
+        </member>
+        <member name="P:RecipeManagement.Domain.Qualifications.Models.QualificationForCreation.SpecificSkillsAndKnowledge">
+            <summary>Compétences et connaissances spécifiques (specific_skills_and_knowledge).</summary>
+        </member>
+        <member name="P:RecipeManagement.Domain.Qualifications.Models.QualificationForCreation.TrainingModules">
+            <summary>Modules de formation (training_modules).</summary>
+        </member>
+        <member name="P:RecipeManagement.Domain.Qualifications.Models.QualificationForCreation.TrainingMode">
+            <summary>Mode de formation (présentiel, e-learning, mixte, sur poste…) (training_mode).</summary>
+        </member>
+        <member name="P:RecipeManagement.Domain.Qualifications.Models.QualificationForCreation.AuthorizedTrainingPersonnel">
+            <summary>Personnel autorisé à délivrer la formation (authorized_training_personnel).</summary>
+        </member>
+        <member name="P:RecipeManagement.Domain.Qualifications.Models.QualificationForCreation.MinimumCompetencyVerification">
+            <summary>Vérification des compétences minimales (minimum_competency_verification).</summary>
+        </member>
+        <member name="P:RecipeManagement.Domain.Qualifications.Models.QualificationForCreation.InitialTrainingPerformanceThreshold">
+            <summary>Seuil de performances pour la formation initiale (initial_training_performance_threshold).</summary>
+        </member>
+        <member name="P:RecipeManagement.Domain.Qualifications.Models.QualificationForCreation.RecurrentCheckPerformanceThreshold">
+            <summary>Seuil de performances pour la revérification annuelle ou suite à un changement (recurrent_check_performance_threshold).</summary>
+        </member>
+        <member name="P:RecipeManagement.Domain.Qualifications.Models.QualificationForCreation.TrainingFramework">
+            <summary>Cadre ou méthodologie de formation (training_framework).</summary>
+        </member>
+        <member name="T:RecipeManagement.Domain.Qualifications.Models.QualificationForUpdate">
+            <summary>Modèle de domaine pour modifier la fiche (passé à qualification.Update). Toutes les valeurs sont remplacées.</summary>
+        </member>
+        <member name="P:RecipeManagement.Domain.Qualifications.Models.QualificationForUpdate.MinimumRecruitmentRequirements">
+            <summary>Exigences de recrutement minimales (minimum_recruitment_requirements).</summary>
+        </member>
+        <member name="P:RecipeManagement.Domain.Qualifications.Models.QualificationForUpdate.RecruitmentRequirementsVerification">
+            <summary>Vérification des exigences de recrutement (recruitment_requirements_verification).</summary>
+        </member>
+        <member name="P:RecipeManagement.Domain.Qualifications.Models.QualificationForUpdate.RequiredPerformanceThresholds">
+            <summary>Seuils de performance requis (required_performance_thresholds).</summary>
+        </member>
+        <member name="P:RecipeManagement.Domain.Qualifications.Models.QualificationForUpdate.Comments">
+            <summary>Commentaires (comments).</summary>
+        </member>
+        <member name="P:RecipeManagement.Domain.Qualifications.Models.QualificationForUpdate.SpecificSkillsAndKnowledge">
+            <summary>Compétences et connaissances spécifiques (specific_skills_and_knowledge).</summary>
+        </member>
+        <member name="P:RecipeManagement.Domain.Qualifications.Models.QualificationForUpdate.TrainingModules">
+            <summary>Modules de formation (training_modules).</summary>
+        </member>
+        <member name="P:RecipeManagement.Domain.Qualifications.Models.QualificationForUpdate.TrainingMode">
+            <summary>Mode de formation (présentiel, e-learning, mixte, sur poste…) (training_mode).</summary>
+        </member>
+        <member name="P:RecipeManagement.Domain.Qualifications.Models.QualificationForUpdate.AuthorizedTrainingPersonnel">
+            <summary>Personnel autorisé à délivrer la formation (authorized_training_personnel).</summary>
+        </member>
+        <member name="P:RecipeManagement.Domain.Qualifications.Models.QualificationForUpdate.MinimumCompetencyVerification">
+            <summary>Vérification des compétences minimales (minimum_competency_verification).</summary>
+        </member>
+        <member name="P:RecipeManagement.Domain.Qualifications.Models.QualificationForUpdate.InitialTrainingPerformanceThreshold">
+            <summary>Seuil de performances pour la formation initiale (initial_training_performance_threshold).</summary>
+        </member>
+        <member name="P:RecipeManagement.Domain.Qualifications.Models.QualificationForUpdate.RecurrentCheckPerformanceThreshold">
+            <summary>Seuil de performances pour la revérification annuelle ou suite à un changement (recurrent_check_performance_threshold).</summary>
+        </member>
+        <member name="P:RecipeManagement.Domain.Qualifications.Models.QualificationForUpdate.TrainingFramework">
+            <summary>Cadre ou méthodologie de formation (training_framework).</summary>
+        </member>
+        <member name="T:RecipeManagement.Domain.Qualifications.Qualification">
+             <summary>
+             Fiche de qualification d'un rôle (remplace l'ancien champ Kcr.MinimumQualifications).
+            
+             Relation : un Kcr possède au plus UNE Qualification (1 — 0..1).
+             La clé étrangère KcrId (kcr_role_id) se trouve ici, côté Qualification.
+            
+             Hérite de BaseEntity : Id, CreatedOn/By, LastModifiedOn/By, IsDeleted, DomainEvents.
+             </summary>
+        </member>
+        <member name="P:RecipeManagement.Domain.Qualifications.Qualification.KcrId">
+            <summary>Clé étrangère vers KCR_ROLE (kcr_role_id).</summary>
+        </member>
+        <member name="P:RecipeManagement.Domain.Qualifications.Qualification.Kcr">
+            <summary>Navigation vers le rôle propriétaire.</summary>
+        </member>
+        <member name="P:RecipeManagement.Domain.Qualifications.Qualification.MinimumRecruitmentRequirements">
+            <summary>Exigences de recrutement minimales (minimum_recruitment_requirements).</summary>
+        </member>
+        <member name="P:RecipeManagement.Domain.Qualifications.Qualification.RecruitmentRequirementsVerification">
+            <summary>Vérification des exigences de recrutement (recruitment_requirements_verification).</summary>
+        </member>
+        <member name="P:RecipeManagement.Domain.Qualifications.Qualification.RequiredPerformanceThresholds">
+            <summary>Seuils de performance requis (required_performance_thresholds).</summary>
+        </member>
+        <member name="P:RecipeManagement.Domain.Qualifications.Qualification.Comments">
+            <summary>Commentaires (comments).</summary>
+        </member>
+        <member name="P:RecipeManagement.Domain.Qualifications.Qualification.SpecificSkillsAndKnowledge">
+            <summary>Compétences et connaissances spécifiques (specific_skills_and_knowledge).</summary>
+        </member>
+        <member name="P:RecipeManagement.Domain.Qualifications.Qualification.TrainingModules">
+            <summary>Modules de formation (training_modules).</summary>
+        </member>
+        <member name="P:RecipeManagement.Domain.Qualifications.Qualification.TrainingMode">
+            <summary>Mode de formation (présentiel, e-learning, mixte, sur poste…) (training_mode).</summary>
+        </member>
+        <member name="P:RecipeManagement.Domain.Qualifications.Qualification.AuthorizedTrainingPersonnel">
+            <summary>Personnel autorisé à délivrer la formation (authorized_training_personnel).</summary>
+        </member>
+        <member name="P:RecipeManagement.Domain.Qualifications.Qualification.MinimumCompetencyVerification">
+            <summary>Vérification des compétences minimales (minimum_competency_verification).</summary>
+        </member>
+        <member name="P:RecipeManagement.Domain.Qualifications.Qualification.InitialTrainingPerformanceThreshold">
+            <summary>Seuil de performances pour la formation initiale (initial_training_performance_threshold).</summary>
+        </member>
+        <member name="P:RecipeManagement.Domain.Qualifications.Qualification.RecurrentCheckPerformanceThreshold">
+            <summary>Seuil de performances pour la revérification annuelle ou suite à un changement (recurrent_check_performance_threshold).</summary>
+        </member>
+        <member name="P:RecipeManagement.Domain.Qualifications.Qualification.TrainingFramework">
+            <summary>Cadre ou méthodologie de formation (training_framework).</summary>
+        </member>
+        <member name="M:RecipeManagement.Domain.Qualifications.Qualification.Create(System.Guid,RecipeManagement.Domain.Qualifications.Models.QualificationForCreation)">
+            <summary>
+            Fabrique : crée la fiche de qualification d'un rôle.
+            L'existence du rôle est vérifiée dans la feature AddQualification.
+            </summary>
+        </member>
+        <member name="M:RecipeManagement.Domain.Qualifications.Qualification.Update(RecipeManagement.Domain.Qualifications.Models.QualificationForUpdate)">
+            <summary>Remplace toutes les valeurs de la fiche (PUT).</summary>
+        </member>
+        <member name="M:RecipeManagement.Domain.Qualifications.Qualification.#ctor">
+            <summary>Constructeur requis par EF Core. Utiliser Qualification.Create(...).</summary>
         </member>
         <member name="M:RecipeManagement.Extensions.Services.WebAppServiceConfiguration.AddBoundaryServices(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Reflection.Assembly[])">
             <summary>

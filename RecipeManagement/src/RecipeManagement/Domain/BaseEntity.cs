@@ -42,4 +42,5 @@ public abstract class BaseEntity
         if(!DomainEvents.Contains(@event))
             DomainEvents.Add(@event);
     }
+
 }

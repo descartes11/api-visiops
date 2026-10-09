@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using RecipeManagement.Databases;
@@ -11,9 +12,11 @@ using RecipeManagement.Databases;
 namespace RecipeManagement.Databases.Migrations
 {
     [DbContext(typeof(RecipesDbContext))]
-    partial class RecipesDbContextModelSnapshot : ModelSnapshot
+    [Migration("20261009075301_AddQualification")]
+    partial class AddQualification
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -76,9 +79,12 @@ namespace RecipeManagement.Databases.Migrations
                         .HasColumnType("text")
                         .HasColumnName("required_performance_thresholds");
 
-                    b.Property<Guid>("KcrId")
+                    b.Property<Guid>("RoleId")
                         .HasColumnType("uuid")
                         .HasColumnName("kcr_role_id");
+
+                    b.Property<Guid?>("RoleId1")
+                        .HasColumnType("uuid");
 
                     b.Property<string>("SpecificSkillsAndKnowledge")
                         .HasColumnType("text")
@@ -98,9 +104,12 @@ namespace RecipeManagement.Databases.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("KcrId")
+                    b.HasIndex("RoleId")
                         .IsUnique()
                         .HasFilter("\"IsDeleted\" = false");
+
+                    b.HasIndex("RoleId1")
+                        .IsUnique();
 
                     b.ToTable("kcr_qualification", (string)null);
                 });
@@ -155,7 +164,7 @@ namespace RecipeManagement.Databases.Migrations
                     b.ToTable("Recipes");
                 });
 
-            modelBuilder.Entity("RecipeManagement.Domain.Kcrs.Kcr", b =>
+            modelBuilder.Entity("RecipeManagement.Domain.Roles.Role", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -187,7 +196,7 @@ namespace RecipeManagement.Databases.Migrations
                     b.Property<DateTimeOffset?>("LastModifiedOn")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<string>("KcrName")
+                    b.Property<string>("RoleName")
                         .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("character varying(100)")
@@ -195,7 +204,7 @@ namespace RecipeManagement.Databases.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("KcrName")
+                    b.HasIndex("RoleName")
                         .IsUnique()
                         .HasFilter("\"IsDeleted\" = false");
 
@@ -204,16 +213,20 @@ namespace RecipeManagement.Databases.Migrations
 
             modelBuilder.Entity("RecipeManagement.Domain.Qualifications.Qualification", b =>
                 {
-                    b.HasOne("RecipeManagement.Domain.Kcrs.Kcr", "Kcr")
-                        .WithOne("Qualification")
-                        .HasForeignKey("RecipeManagement.Domain.Qualifications.Qualification", "KcrId")
+                    b.HasOne("RecipeManagement.Domain.Roles.Role", "Role")
+                        .WithOne()
+                        .HasForeignKey("RecipeManagement.Domain.Qualifications.Qualification", "RoleId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.Navigation("Kcr");
+                    b.HasOne("RecipeManagement.Domain.Roles.Role", null)
+                        .WithOne("Qualification")
+                        .HasForeignKey("RecipeManagement.Domain.Qualifications.Qualification", "RoleId1");
+
+                    b.Navigation("Role");
                 });
 
-            modelBuilder.Entity("RecipeManagement.Domain.Kcrs.Kcr", b =>
+            modelBuilder.Entity("RecipeManagement.Domain.Roles.Role", b =>
                 {
                     b.Navigation("Qualification");
                 });
